@@ -1,13 +1,14 @@
 #include <Arduino.h>
 #include <Adafruit_NeoPixel.h>
 
-#define PIN           GPIO_NUM_26
-#define NUM_LEDS      16
-#define WAIT          100
-#define WAIT_RAINBOW  20
+#define PIN           GPIO_NUM_26 //  Pin donde tengo conectado DIN
+#define NUM_LEDS      16          //  Numero de leds del anillo
+#define WAIT          75          //  Delay de barrido de leds
+#define WAIT_RAINBOW  10          //  Delay de efecto arcoiris
 
 Adafruit_NeoPixel strip = Adafruit_NeoPixel(NUM_LEDS, PIN, NEO_GRB + NEO_KHZ800);
 
+//Funcion helper para efecto arcoiris
 uint32_t Wheel(byte WheelPos) {
   WheelPos = 255 - WheelPos;
   if(WheelPos < 85) {
@@ -21,6 +22,7 @@ uint32_t Wheel(byte WheelPos) {
   return strip.Color(WheelPos * 3, 255 - WheelPos * 3, 0);
 }
 
+//Efecto arcoiris
 void rainbow(uint8_t wait) {
   uint16_t i, j;
 
@@ -33,6 +35,7 @@ void rainbow(uint8_t wait) {
   }
 }
 
+//Efecto barrido Leds
 void colorWipe(uint32_t c, uint8_t wait) {
   for(uint16_t i=0; i<strip.numPixels(); i++) {
     strip.setPixelColor(i, c);
@@ -49,13 +52,13 @@ void setup() {
 
 void loop() {
   colorWipe(strip.Color(0, 0, 0), WAIT);
-  colorWipe(strip.Color(255, 0, 0), WAIT);
-  colorWipe(strip.Color(0, 255, 0), WAIT);
-  colorWipe(strip.Color(0, 0, 255), WAIT);
+  colorWipe(strip.Color(255, 0, 0), WAIT);  // Rojo
+  colorWipe(strip.Color(0, 255, 0), WAIT);  // Verde
+  colorWipe(strip.Color(0, 0, 255), WAIT);  // Azul
 
-  colorWipe(strip.Color(255, 255, 0), WAIT);
-  colorWipe(strip.Color(255, 0, 255), WAIT);
-  colorWipe(strip.Color(0, 255, 255), WAIT);
+  colorWipe(strip.Color(255, 255, 0), WAIT);  // Amarillo
+  colorWipe(strip.Color(255, 0, 255), WAIT);  // Morado
+  colorWipe(strip.Color(0, 255, 255), WAIT);  // Turquesa
 
   colorWipe(strip.Color(0, 0, 0), WAIT);
   rainbow(WAIT_RAINBOW);
