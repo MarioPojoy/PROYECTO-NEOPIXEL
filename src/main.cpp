@@ -1,7 +1,12 @@
 #include <Arduino.h>
 #include <Adafruit_NeoPixel.h>
 
-#define PIN           GPIO_NUM_26 //  Pin donde tengo conectado DIN
+#if defined(ARDUINO_UNOR4_MINIMA)
+  #define PIN           PIN_D2
+#elif defined(ARDUINO_D1_UNO32)
+  #define PIN           GPIO_NUM_26
+#endif
+
 #define NUM_LEDS      16          //  Numero de leds del anillo
 #define WAIT          75          //  Delay de barrido de leds
 #define WAIT_RAINBOW  10          //  Delay de efecto arcoiris
