@@ -5,6 +5,8 @@
   #define PIN           PIN_D2
 #elif defined(ARDUINO_D1_UNO32)
   #define PIN           GPIO_NUM_26
+#else defined(ARDUINO_UNO_R3)
+  #define PIN           2
 #endif
 
 #define NUM_LEDS      16          //  Numero de leds del anillo
