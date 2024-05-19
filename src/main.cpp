@@ -5,7 +5,7 @@
   #define PIN           PIN_D2
 #elif defined(ARDUINO_D1_UNO32)
   #define PIN           GPIO_NUM_26
-#else defined(ARDUINO_UNO_R3)
+#elif defined(ARDUINO_AVR_UNO)
   #define PIN           2
 #endif
 
